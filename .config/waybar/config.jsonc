@@ -16,14 +16,15 @@
   "modules-center": ["clock"],
   "modules-right": [
     "mpd",
-    "pulseaudio",
     "network",
     "power-profiles-daemon",
     "cpu",
-    "memory",
-    "temperature",
+    "custom/cpu_temp",
+    "custom/memory",
+    "disk",
     "backlight",
-    "keyboard-state",
+    "wireplumber#sink",
+    "wireplumber#source",
     "sway/language",
     "battery",
     "tray",
@@ -188,20 +189,8 @@
     "format-calendar-weeks": "<span color='#7FBBB3'><b>W{:%V}</b></span>",
     "format-calendar-weekdays": "<span color='#A7C080'><b>{}</b></span>",
   },
-  "cpu": {
-    "format": "{usage}% ",
-    "tooltip": false,
-  },
   "memory": {
     "format": "{}% ",
-  },
-  "temperature": {
-    // "thermal-zone": 2,
-    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 80,
-    // "format-critical": "{temperatureC}°C {icon}",
-    "format": "{temperatureC}°C {icon}",
-    "format-icons": ["", "", ""],
   },
   "backlight": {
     // "device": "acpi_video1",
@@ -237,33 +226,20 @@
       "power-saver": "",
     },
   },
-  "network": {
-    // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
-  },
-  "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""],
-    },
+  "wireplumber#sink": {
+    "format": "{volume}% {icon}",
+    "format-muted": "󰖁",
+    "format-icons": ["", "", ""],
     "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "scroll-step": 1,
+  },
+  "wireplumber#source": {
+    "node-type": "Audio/Source",
+    "format": "{volume}% ",
+    "format-muted": "",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "scroll-step": 1,
   },
   "custom/media": {
     "format": "{icon} {text}",
@@ -288,5 +264,42 @@
       "suspend": "systemctl suspend",
       "hibernate": "systemctl hibernate",
     },
+  },
+
+  "network": {
+    "interval": 2,
+    "format": "<span color='#d3869b' size='larger'>󱘖 </span> {bandwidthDownBits}",
+    "format-wifi": "<span color='#d3869b' size='larger'>{icon} </span> {bandwidthDownBits}",
+    "format-ethernet": "<span color='#d3869b' size='larger'>󰈀 </span> {bandwidthDownBits}",
+    "format-icons": ["󰤫", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip": false,
+    "states": {
+      "normal": 25,
+    },
+  },
+
+  "cpu": {
+    "format": "<span color='#e78a4e' size='larger'> </span> {usage}%",
+    "tooltip": false,
+    "interval": 1,
+  },
+  "custom/cpu_temp": {
+    "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
+    "tooltip": false,
+  },
+
+  "custom/memory": {
+    "exec": "~/.config/waybar/scripts/memory-usage.sh",
+    "interval": 2,
+    "return-type": "json",
+    "format": "<span color='#458588' size='larger'>  </span> {}",
+  },
+
+  "disk": {
+    "format": "<span color='#ea6962' size='larger'> </span> {free}",
+    "interval": 20,
   },
 }

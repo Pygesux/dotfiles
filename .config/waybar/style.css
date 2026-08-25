@@ -1,12 +1,6 @@
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family:
-    Hack Nerd Font,
-    FontAwesome,
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family: Hack Nerd Font;
   font-size: 13px;
 }
 
@@ -19,6 +13,7 @@ window#waybar {
   color: #ffffff;
   transition-property: background-color;
   transition-duration: 0.5s;
+  font-weight: 900;
 }
 
 window#waybar.hidden {
@@ -30,14 +25,6 @@ window#waybar.hidden {
 .modules-right {
   margin: 5px 12px;
 }
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 window#waybar.termite {
   background-color: #3f3f3f;
@@ -60,11 +47,6 @@ button {
 button:hover {
   background: inherit;
   box-shadow: inset 0 -2px #888888;
-}
-
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-  background-color: #a37800;
 }
 
 #workspaces button {
@@ -107,7 +89,6 @@ button:hover {
 #temperature,
 #backlight,
 #network,
-#pulseaudio,
 #wireplumber,
 #custom-media,
 #tray,
@@ -133,11 +114,6 @@ button:hover {
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
   margin-right: 0;
-}
-
-#clock {
-  background-color: @section-background;
-  border: 2px solid @section-border;
 }
 
 #battery {
@@ -192,17 +168,18 @@ label:focus {
   background-color: #000000;
 }
 
-#cpu {
-  background-color: #2ecc71;
-  color: #000000;
+#cpu,
+#disk,
+#clock {
+  border: 2px solid @section-border;
+  background-color: @section-background;
 }
 
-#memory {
-  background-color: #9b59b6;
-}
-
-#disk {
-  background-color: #964b00;
+#custom-cpu_temp,
+#custom-memory {
+  border: 2px solid @section-border;
+  background-color: @section-background;
+  padding-right: 10px;
 }
 
 #backlight {
@@ -210,21 +187,8 @@ label:focus {
 }
 
 #network {
-  background-color: #2980b9;
-}
-
-#network.disconnected {
-  background-color: #f53c3c;
-}
-
-#pulseaudio {
-  background-color: #f1c40f;
-  color: #000000;
-}
-
-#pulseaudio.muted {
-  background-color: #90b1b1;
-  color: #2a5c45;
+  background-color: @section-background;
+  border: 2px solid @section-border;
 }
 
 #wireplumber {
@@ -269,15 +233,6 @@ label:focus {
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
   background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-  background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-  background-color: #ecf0f1;
-  color: #2d3436;
 }
 
 #mpd {
