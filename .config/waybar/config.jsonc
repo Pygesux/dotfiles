@@ -21,10 +21,9 @@
     "cpu",
     "custom/cpu_temp",
     "custom/memory",
-    "disk",
-    "backlight",
     "wireplumber#sink",
     "wireplumber#source",
+    "backlight",
     "sway/language",
     "battery",
     "tray",
@@ -136,9 +135,11 @@
       "unlocked": "",
     },
   },
+
   "hyprland/submap": {
     "format": "<span style=\"italic\">{}</span>",
   },
+
   "sway/scratchpad": {
     "format": "{icon} {count}",
     "show-empty": false,
@@ -146,6 +147,7 @@
     "tooltip": true,
     "tooltip-format": "{app}: {title}",
   },
+
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
     "format-disconnected": "Disconnected ",
@@ -172,6 +174,7 @@
     "tooltip-format": "MPD (connected)",
     "tooltip-format-disconnected": "MPD (disconnected)",
   },
+
   "tray": {
     // "icon-size": 21,
     "spacing": 10,
@@ -189,58 +192,57 @@
     "format-calendar-weeks": "<span color='#7FBBB3'><b>W{:%V}</b></span>",
     "format-calendar-weekdays": "<span color='#A7C080'><b>{}</b></span>",
   },
+
   "memory": {
     "format": "{}% ",
   },
+
   "backlight": {
-    // "device": "acpi_video1",
-    "format": "{percent}% {icon}",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "format": "<span color='#f6c657' size='larger'> 󰞏 </span> {percent}%",
   },
+
   "battery": {
+    "interval": 1,
     "states": {
-      // "good": 95,
+      "good": 99,
       "warning": 30,
-      "critical": 15,
+      "critical": 20,
     },
-    "format": "{capacity}% {icon}",
-    "format-full": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
-    "format-alt": "{time} {icon}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
-    "format-icons": ["", "", "", "", ""],
+
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format": "<span color='#689d6a' size='larger'> {icon} </span> {capacity}%",
+    "format-critical": "<span color='#cc241d' size='larger'> {icon} </span> {capacity}%!!",
+    "format-warning": "<span color='#e78a4e' size='larger'> {icon} </span> {capacity}%",
+    "format-full": "<span color='#689d6a' size='larger'> 󰂅 </span> {capacity}%",
+    "format-charging": "<span color='#689d6a' size='larger'> 󰂅 </span> {capacity}%",
+    "format-charging-warning": "<span color='#e78a4e' size='larger'> 󰢝 </span> {capacity}%",
+    "format-charging-critical": "<span color='#cc241d' size='larger'> 󰢜 </span> {capacity}%",
+    "format-plugged": "<span color='#689d6a' size='larger'> 󰂅 </span> {capacity}%",
+    "format-alt": "<span color='#689d6a' size='larger'> 󱧥 </span> {time}",
+    "tooltip": false,
   },
+
   "battery#bat2": {
     "bat": "BAT2",
   },
-  "power-profiles-daemon": {
-    "format": "{icon}",
-    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-    "tooltip": true,
-    "format-icons": {
-      "default": "",
-      "performance": "",
-      "balanced": "",
-      "power-saver": "",
-    },
-  },
+
   "wireplumber#sink": {
-    "format": "{volume}% {icon}",
-    "format-muted": "󰖁",
-    "format-icons": ["", "", ""],
+    "format": "<span color='#458588' size='x-large' > {icon} </span> {volume}%",
+    "format-muted": "<span color='#458588' size='x-large' > 󰝟 </span> {volume}%",
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
     "on-click": "pavucontrol",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "scroll-step": 1,
   },
+
   "wireplumber#source": {
     "node-type": "Audio/Source",
-    "format": "{volume}% ",
-    "format-muted": "",
+    "format": "<span color='#b16286' size='larger'> 󰍬 </span> {volume}%",
+    "format-muted": "<span color='#b16286' > 󰍭 </span> {volume}%",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "scroll-step": 1,
   },
+
   "custom/media": {
     "format": "{icon} {text}",
     "return-type": "json",
@@ -252,18 +254,6 @@
     "escape": true,
     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-  },
-  "custom/power": {
-    "format": "⏻ ",
-    "tooltip": false,
-    "menu": "on-click",
-    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-    "menu-actions": {
-      "shutdown": "shutdown",
-      "reboot": "reboot",
-      "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate",
-    },
   },
 
   "network": {
