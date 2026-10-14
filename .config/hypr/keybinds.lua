@@ -9,6 +9,8 @@ local menu = "rofi -show run"
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+
+hl.bind("CTRL + ALT + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.kill())
 
