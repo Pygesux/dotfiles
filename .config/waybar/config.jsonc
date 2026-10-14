@@ -227,18 +227,18 @@
   },
 
   "wireplumber#sink": {
-    "format": "<span color='#458588' size='x-large' > {icon} </span> {volume}%",
-    "format-muted": "<span color='#458588' size='x-large' > 󰝟 </span> {volume}%",
+    "format": "<span color='#458588' size='x-large' rise='-1500' > {icon} </span>{volume}%",
+    "format-muted": "<span color='#458588' size='x-large' > 󰝟 </span>{volume}%",
     "format-icons": ["󰕿", "󰖀", "󰕾"],
-    "on-click": "pavucontrol",
+    "on-click": "pwvucontrol",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "scroll-step": 1,
   },
 
   "wireplumber#source": {
     "node-type": "Audio/Source",
-    "format": "<span color='#b16286' size='larger'> 󰍬 </span> {volume}%",
-    "format-muted": "<span color='#b16286' > 󰍭 </span> {volume}%",
+    "format": "<span color='#b16286' size='larger'> 󰍬 </span>{volume}%",
+    "format-muted": "<span color='#b16286' > 󰍭 </span>{volume}%",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "scroll-step": 1,
   },
