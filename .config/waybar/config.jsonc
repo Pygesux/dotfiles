@@ -199,6 +199,7 @@
 
   "backlight": {
     "format": "<span color='#f6c657' size='larger'> 󰞏 </span> {percent}%",
+    "tooltip": false,
   },
 
   "battery": {
