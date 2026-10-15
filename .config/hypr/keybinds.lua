@@ -82,3 +82,12 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 
 -- Switch keyboard layout
 hl.bind("ALT_L + SHIFT_L", hl.dsp.exec_cmd("hyprctl switchxkblayout all next"))
+
+-- Screenshot
+hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
+hl.bind(
+	"SHIFT + Print",
+	hl.dsp.exec_cmd(
+		[[f=~/Pictures/$(date +%s).png; grim -g "$(slurp)" - | swappy -f - -o "$f"; [ -f "$f" ] && notify-send "Screenshot saved" "$f"]]
+	)
+)
