@@ -1,0 +1,6 @@
+greetd
+iwd
+systemd-networkd
+systemd-resolved
+systemd-timesyncd
+fstrim.timer
