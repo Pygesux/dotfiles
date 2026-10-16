@@ -85,6 +85,21 @@ apply_gsettings() {
     " || warn "gsettings failed; rerun from inside Hyprland"
 }
 
+set_shell() {
+  local zsh_path
+  zsh_path="$(command -v zsh)"
+  if [[ "$(getent passwd "$USER" | cut -d: -f7)" != "$zsh_path" ]]; then
+    log "Setting login shell to zsh"
+    sudo chsh -s "$zsh_path" "$USER"
+  fi
+}
+
+install_ohmyzsh() {
+  [[ -d "$HOME/.oh-my-zsh" ]] && return
+  log "Cloning Oh My Zsh"
+  git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+}
+
 main() {
   sudo pacman -Syu --noconfirm
   sudo pacman -S --needed --noconfirm stow
@@ -95,6 +110,10 @@ main() {
   done
 
   link_dotfiles
+
+  set_shell
+
+  install_ohmyzsh
 
   for profile in "${PROFILES[@]}"; do
     enable_services "$profile"
