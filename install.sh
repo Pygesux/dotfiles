@@ -66,28 +66,23 @@ enable_services() {
 }
 
 link_dotfiles() {
-  log "Stowing dotfiles"
-  cd "$DOTS"
-  local dir
-  for dir in */; do
-    dir="${dir%/}"
-    case "$dir" in packages | system) continue ;; esac
-    stow -t "$HOME" -R "$dir"
-  done
+  log "Stowing home"
+  stow -d "$DOTS" -t "$HOME" --no-folding -R home
 
   if [[ -d "$DOTS/system" ]]; then
-    log "Stowing system config into /"
-    sudo stow -t / -R system
+    log "Copying system config into /"
+    sudo cp -rv "$DOTS/system/." /
+    sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
   fi
 }
 
 apply_gsettings() {
   log "Applying gsettings"
-  # Needs a running D-Bus session. From a bare TTY it will fail;
-  # rerun this script from inside Hyprland if so.
-  gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark' || warn "gsettings failed (theme)"
-  gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark' || warn "gsettings failed (icons)"
-  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || warn "gsettings failed (color-scheme)"
+  dbus-run-session -- bash -c "
+        gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
+        gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    " || warn "gsettings failed; rerun from inside Hyprland"
 }
 
 main() {
