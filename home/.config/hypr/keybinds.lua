@@ -38,9 +38,16 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
+hl.bind(mainMod .. " + SHIFT + F9", hl.dsp.workspace.move({ monitor = "left" }))
+hl.bind(mainMod .. " + SHIFT + F10", hl.dsp.workspace.move({ monitor = "down" }))
+hl.bind(mainMod .. " + SHIFT + F11", hl.dsp.workspace.move({ monitor = "up" }))
+hl.bind(mainMod .. " + SHIFT + F12", hl.dsp.workspace.move({ monitor = "right" }))
+
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))

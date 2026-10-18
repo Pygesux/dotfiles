@@ -51,6 +51,10 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 -- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+--
+hl.config({ general = {
+	resize_on_border = true,
+} })
 
 ----------------
 ----  MISC  ----
@@ -74,6 +78,9 @@ hl.config({
 		kb_model = "",
 		kb_options = "",
 		kb_rules = "",
+
+		repeat_delay = 300,
+		repeat_rate = 50,
 
 		follow_mouse = 1,
 
