@@ -1,6 +1,6 @@
 local terminal = "kitty"
 local fileManager = "thunar"
-local menu = "rofi -show run"
+local menu = "rofi -show drun -theme gruvbox-dark"
 
 ---------------------
 ---- KEYBINDINGS ----
