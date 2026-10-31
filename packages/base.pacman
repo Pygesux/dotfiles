@@ -9,6 +9,7 @@ git
 greetd
 greetd-tuigreet
 grim
+gvfs
 hypridle
 hyprland
 hyprlock
@@ -36,6 +37,7 @@ swaync
 thunar
 ttf-hack-nerd
 tumbler
+udisks2
 unzip
 waybar
 wireplumber
