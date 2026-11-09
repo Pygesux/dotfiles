@@ -1,0 +1,3 @@
+# Machine-specific config, stowed but not committed
+home/.zshrc.local
+home/.config/nvim/lua/plugins/local-*.lua
