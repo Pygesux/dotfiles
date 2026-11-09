@@ -108,3 +108,14 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export PATH="$HOME/.local/bin:$PATH"
+umask 077
+
+# Start Claude in the main project, with the rest of the stack as extra dirs
+claude-stack() {
+  local base=~/projects
+  local main=lzp-portal
+  local extra=(lzp-api lzp-app lzp-library lzp-2-legacy)
+
+  claude-run "$base/$main" -- "$@" --add-dir "${extra[@]/#/$base/}"
+}
